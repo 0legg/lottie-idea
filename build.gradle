@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.2.1"
+    id "nebula.kotlin" version "1.0.6"
+}
+
+repositories {
+    jcenter()
+}
+
+intellij {
+    version '2016.1'
+}
+
+group 'net.olegg'
+version '0.0.1'
