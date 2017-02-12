@@ -15,6 +15,7 @@ repositories {
 
 intellij {
     version '2016.1'
+    patchPluginXml.enabled false
 }
 
 group 'net.olegg'
