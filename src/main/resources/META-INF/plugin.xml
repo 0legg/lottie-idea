@@ -1,0 +1,29 @@
+<idea-plugin>
+    <id>net.olegg.bodylookin</id>
+    <name>bodylookin</name>
+    <version>0.0.1</version>
+    <vendor email="me@olegg.net" url="http://olegg.net">Oleg Godovykh</vendor>
+
+    <description><![CDATA[
+        Basic viewer for Adobe After Effects animations exported with bodymovin library.</br>
+    ]]>
+    </description>
+
+    <change-notes><![CDATA[
+        <b>0.0.1</b>
+        <ul>
+            <li>Initial release</li>
+        </ul>
+    ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.lang</depends>
+    <idea-version since-build="145"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+    </actions>
+
+</idea-plugin>
