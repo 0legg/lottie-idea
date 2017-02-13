@@ -2,7 +2,7 @@
     <id>net.olegg.bodylookin</id>
     <name>bodylookin</name>
     <version>0.0.1</version>
-    <vendor email="me@olegg.net" url="http://olegg.net">Oleg Godovykh</vendor>
+    <vendor email="me@olegg.net">Oleg Godovykh</vendor>
 
     <description><![CDATA[
         Basic viewer for Adobe After Effects animations exported with bodymovin library.</br>
@@ -21,9 +21,22 @@
     <idea-version since-build="145"/>
 
     <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+            id="bodylookin"
+            anchor="right"
+            secondary="true"
+            factoryClass="net.olegg.bodylookin.toolwindow.BodylookinFactory"
+        />
     </extensions>
 
     <actions>
+        <action
+                class="net.olegg.bodylookin.action.LookAction"
+                id="bodylookin.LookAction"
+                text="bodylookin"
+        >
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
     </actions>
 
 </idea-plugin>
