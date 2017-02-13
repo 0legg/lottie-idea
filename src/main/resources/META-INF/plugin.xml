@@ -30,13 +30,15 @@
     </extensions>
 
     <actions>
-        <action
-                class="net.olegg.bodylookin.action.LookAction"
-                id="bodylookin.LookAction"
-                text="bodylookin"
-        >
+        <group id="bodylookin.ActionGroup">
+            <action
+                    class="net.olegg.bodylookin.action.LookAction"
+                    id="bodylookin.LookAction"
+                    text="bodylookin"
+                    icon="/icons/wave.png"
+            />
             <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
+        </group>
     </actions>
 
 </idea-plugin>
