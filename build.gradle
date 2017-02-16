@@ -21,7 +21,7 @@ dependencies {
 
 intellij {
     version '2016.1'
-    patchPluginXml.enabled false
+    updateSinceUntilBuild false
 }
 
 group 'net.olegg'
