@@ -25,5 +25,10 @@ intellij {
     updateSinceUntilBuild false
 }
 
+publishPlugin {
+    username credentials.JETBRAINS_USERNAME
+    password credentials.JETBRAINS_PASSWORD
+}
+
 group 'net.olegg'
 version '0.0.1'
