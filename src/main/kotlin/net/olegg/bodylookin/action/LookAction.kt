@@ -18,16 +18,17 @@ class LookAction: AnAction() {
         val editor = FileEditorManager.getInstance(project).selectedTextEditor
         val toolWindowManager = ToolWindowManager.getInstance(project)
         val toolWindow = toolWindowManager.getToolWindow(Constants.TOOL_WINDOW_ID)
+        val json = editor?.document?.text
         if (toolWindow.isVisible) {
-            if (editor != null) {
-                val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return
-                content.loadAnimation(editor.document.text)
+            val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return
+            if (json != null) {
+                content.loadAnimation(json)
             }
         } else {
             toolWindow.show {
-                if (editor != null) {
-                    val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return@show
-                    content.loadAnimation(editor.document.text)
+                val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return@show
+                if (json != null) {
+                    content.loadAnimation(json)
                 }
             }
         }
