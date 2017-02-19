@@ -31,20 +31,8 @@
             id="bodylookin"
             anchor="right"
             secondary="true"
+            icon="/icons/wave.png"
             factoryClass="net.olegg.bodylookin.toolwindow.BodylookinFactory"
         />
     </extensions>
-
-    <actions>
-        <group id="bodylookin.ActionGroup">
-            <action
-                    class="net.olegg.bodylookin.action.LookAction"
-                    id="bodylookin.LookAction"
-                    text="bodylookin"
-                    icon="/icons/wave.png"
-            />
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </group>
-    </actions>
-
 </idea-plugin>
