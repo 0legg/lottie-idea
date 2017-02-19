@@ -3,6 +3,7 @@ package net.olegg.bodylookin.toolwindow
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.ActionPlaces
+import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.ui.components.JBPanel
 import javafx.application.Platform
 import javafx.concurrent.Worker
@@ -16,7 +17,7 @@ import java.awt.BorderLayout
 /**
  * Created by olegg on 2/12/17.
  */
-class BodylookinView : JBPanel<BodylookinView>(BorderLayout()) {
+class BodylookinView : SimpleToolWindowPanel(true) {
     val root: String = javaClass.classLoader.getResource("/bodylookin.html").toExternalForm()
 
     val panel = JFXPanel()
@@ -25,12 +26,12 @@ class BodylookinView : JBPanel<BodylookinView>(BorderLayout()) {
 
     init {
         val manager = ActionManager.getInstance()
-        val group = ActionManager.getInstance().getAction(Constants.ACTION_GROUP) as? ActionGroup
+        val group = manager.getAction(Constants.ACTION_GROUP) as? ActionGroup
         if (group != null) {
-            val toolbar = manager.createActionToolbar(ActionPlaces.TOOLWINDOW_TITLE, group, true)
-            add(BorderLayout.NORTH, toolbar.component)
+            setToolbar(manager.createActionToolbar(ActionPlaces.TOOLWINDOW_TITLE, group, true).component)
         }
-        add(BorderLayout.CENTER, panel)
+        setContent(panel)
+
         Platform.setImplicitExit(false)
         Platform.runLater {
             webview = WebView()
