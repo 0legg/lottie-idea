@@ -9,6 +9,12 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>0.0.2</b>
+        <ul>
+            <li>Fixed plugin crash when JavaFX is not present</li>
+            <li>Added player controls (play, pause, loop)</li>
+            <li>Updated bodymovin to 4.5.7</li>
+        </ul>
         <b>0.0.1</b>
         <ul>
             <li>Initial release</li>
