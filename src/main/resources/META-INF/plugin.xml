@@ -1,7 +1,6 @@
 <idea-plugin>
     <id>net.olegg.bodylookin</id>
     <name>bodylookin</name>
-    <version>0.0.1</version>
     <vendor email="me@olegg.net">Oleg Godovykh</vendor>
 
     <description><![CDATA[
