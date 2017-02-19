@@ -20,6 +20,12 @@
     <depends>com.intellij.modules.lang</depends>
     <idea-version since-build="145"/>
 
+    <application-components>
+        <component>
+            <implementation-class>net.olegg.bodylookin.BodylookinPlugin</implementation-class>
+        </component>
+    </application-components>
+
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
             id="bodylookin"

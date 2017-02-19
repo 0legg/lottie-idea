@@ -6,7 +6,7 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.1"
+    id "org.jetbrains.intellij" version "0.2.5"
     id "com.zoltu.kotlin" version "1.0.6"
 }
 
@@ -21,7 +21,7 @@ dependencies {
 
 intellij {
     version '2016.1'
-    patchPluginXml.enabled false
+    updateSinceUntilBuild false
 }
 
 group 'net.olegg'
