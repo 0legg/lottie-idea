@@ -2,8 +2,13 @@ package net.olegg.bodylookin.toolwindow
 
 import com.intellij.json.JsonFileType
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.fileChooser.FileChooserFactory
 import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.impl.LoadTextUtil
 import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.ui.JBUI
 import javafx.application.Platform
 import javafx.concurrent.Worker
@@ -39,6 +44,16 @@ class BodylookinView : SimpleToolWindowPanel(true) {
                 val project = e?.project ?: return@let false
                 val file = FileEditorManager.getInstance(project).selectedFiles.getOrNull(0)
                 return@let file?.fileType == JsonFileType.INSTANCE
+            }
+        }
+    }
+
+    val openAction: AnAction = object : AnAction("Load file", "", Icons.OPEN) {
+        override fun actionPerformed(e: AnActionEvent?) {
+            val descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor(JsonFileType.INSTANCE)
+            val file = FileChooserFactory.getInstance().createFileChooser(descriptor, null, null).choose(null).getOrNull(0)
+            if (file != null) {
+                loadFile(file)
             }
         }
     }
@@ -93,6 +108,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
         val group = DefaultActionGroup()
         group.addAll(listOf(
                 lookAction,
+                openAction,
                 Separator(),
                 playAction,
                 pauseAction,
@@ -135,6 +151,13 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             } else {
                 js = engine.executeScript(script) as? JSObject
             }
+        }
+    }
+
+    fun loadFile(file: VirtualFile) {
+        ApplicationManager.getApplication().runReadAction {
+            val json = LoadTextUtil.loadText(file).toString()
+            loadJson(json)
         }
     }
 }
