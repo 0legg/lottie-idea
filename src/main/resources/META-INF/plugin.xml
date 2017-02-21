@@ -9,6 +9,12 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>0.0.3</b>
+        <ul>
+            <li>Added file loading from context menu</li>
+            <li>Added file loading from filesystem</li>
+            <li>Limit supported files to JSON</li>
+        </ul>
         <b>0.0.2</b>
         <ul>
             <li>Fixed plugin crash when JavaFX is not present</li>
