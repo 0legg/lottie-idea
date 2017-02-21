@@ -42,13 +42,16 @@
     </extensions>
 
     <actions>
-        <group id="bodylookin.ActionGroup">
-            <action
-                    class="net.olegg.bodylookin.action.LoadAction"
-                    id="bodylookin.LoadAction"
-                    text="bodylookin"
-                    icon="/icons/wiggle.png"
-            />
-        </group>
+        <action
+            class="net.olegg.bodylookin.action.LoadAction"
+            id="bodylookin.LoadAction"
+            text="bodylookin"
+            icon="/icons/wiggle.png"
+            >
+
+            <add-to-group group-id="EditorPopupMenu"/>
+            <add-to-group group-id="ProjectViewPopupMenu"/>
+            <add-to-group group-id="EditorTabPopupMenu"/>
+        </action>
     </actions>
 </idea-plugin>
