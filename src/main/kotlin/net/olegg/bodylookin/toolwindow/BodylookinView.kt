@@ -17,6 +17,7 @@ import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
 import net.olegg.bodylookin.Icons
+import net.olegg.bodylookin.isJson
 import netscape.javascript.JSObject
 
 /**
@@ -43,7 +44,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             e?.presentation?.isEnabled = let {
                 val project = e?.project ?: return@let false
                 val file = FileEditorManager.getInstance(project).selectedFiles.getOrNull(0)
-                return@let file?.fileType == JsonFileType.INSTANCE
+                return@let file.isJson
             }
         }
     }
