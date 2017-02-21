@@ -1,36 +1,99 @@
 package net.olegg.bodylookin.toolwindow
 
-import com.intellij.openapi.actionSystem.ActionGroup
-import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.actionSystem.ActionPlaces
-import com.intellij.ui.components.JBPanel
+import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.util.ui.JBUI
 import javafx.application.Platform
 import javafx.concurrent.Worker
 import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
-import net.olegg.bodylookin.Constants
-import java.awt.BorderLayout
+import net.olegg.bodylookin.Icons
+import netscape.javascript.JSObject
 
 /**
  * Created by olegg on 2/12/17.
  */
-class BodylookinView : JBPanel<BodylookinView>(BorderLayout()) {
+class BodylookinView : SimpleToolWindowPanel(true) {
     val root: String = javaClass.classLoader.getResource("/bodylookin.html").toExternalForm()
 
     val panel = JFXPanel()
     lateinit var webview: WebView
     lateinit var engine: WebEngine
+    var js: JSObject? = null
+
+    val lookAction: AnAction = object : AnAction("Load from editor", "", Icons.LOAD) {
+        override fun actionPerformed(e: AnActionEvent?) {
+            val project = e?.project ?: return
+            val json = FileEditorManager.getInstance(project).selectedTextEditor?.document?.text
+            if (json != null) {
+                loadAnimation(json)
+            }
+        }
+    }
+
+    val playAction: AnAction = object : AnAction("Play", "", Icons.PLAY) {
+        override fun actionPerformed(e: AnActionEvent?) {
+            Platform.runLater {
+                js?.eval("""if (!this.loop && this.currentFrame >= this.totalFrames - 1) {
+                    this.goToAndPlay(0, true);
+                } else {
+                    this.play();
+                }""")
+            }
+        }
+
+        override fun update(e: AnActionEvent?) {
+            Platform.runLater {
+                e?.presentation?.isEnabled = js?.eval("this.isLoaded && this.isPaused") as? Boolean ?: false
+            }
+        }
+    }
+
+    val pauseAction: AnAction = object : AnAction("Pause", "", Icons.PAUSE) {
+        override fun actionPerformed(e: AnActionEvent?) {
+            Platform.runLater {
+                js?.eval("this.pause()")
+            }
+        }
+
+        override fun update(e: AnActionEvent?) {
+            Platform.runLater {
+                e?.presentation?.isEnabled = js?.eval("this.isLoaded && !this.isPaused") as? Boolean ?: false
+            }
+        }
+    }
+
+    val loopAction: AnAction = object : ToggleAction("Toggle loop", "", Icons.LOOP) {
+        var loop = true
+
+        override fun isSelected(e: AnActionEvent?): Boolean {
+            return loop
+        }
+
+        override fun setSelected(e: AnActionEvent?, state: Boolean) {
+            Platform.runLater {
+                loop = js?.eval("this.loop = $state") as? Boolean ?: state
+            }
+        }
+    }
 
     init {
-        val manager = ActionManager.getInstance()
-        val group = ActionManager.getInstance().getAction(Constants.ACTION_GROUP) as? ActionGroup
-        if (group != null) {
-            val toolbar = manager.createActionToolbar(ActionPlaces.TOOLWINDOW_TITLE, group, true)
-            add(BorderLayout.NORTH, toolbar.component)
-        }
-        add(BorderLayout.CENTER, panel)
+        val group = DefaultActionGroup()
+        group.addAll(listOf(
+                lookAction,
+                Separator(),
+                playAction,
+                pauseAction,
+                loopAction
+        ))
+
+        val toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.TOOLWINDOW_TITLE, group, true)
+        setToolbar(JBUI.Panels.simplePanel(toolbar.component))
+        setContent(panel)
+
         Platform.setImplicitExit(false)
         Platform.runLater {
             webview = WebView()
@@ -57,11 +120,11 @@ class BodylookinView : JBPanel<BodylookinView>(BorderLayout()) {
             if (engine.loadWorker.state != Worker.State.SUCCEEDED) {
                 engine.loadWorker.stateProperty().addListener { value, oldState, newState ->
                     if (newState == Worker.State.SUCCEEDED) {
-                        engine.executeScript(script)
+                        js = engine.executeScript(script) as? JSObject
                     }
                 }
             } else {
-                engine.executeScript(script)
+                js = engine.executeScript(script) as? JSObject
             }
         }
     }

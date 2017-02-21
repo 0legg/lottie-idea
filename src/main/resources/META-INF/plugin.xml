@@ -1,7 +1,6 @@
 <idea-plugin>
     <id>net.olegg.bodylookin</id>
     <name>bodylookin</name>
-    <version>0.0.1</version>
     <vendor email="me@olegg.net">Oleg Godovykh</vendor>
 
     <description><![CDATA[
@@ -10,6 +9,12 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>0.0.2</b>
+        <ul>
+            <li>Fixed plugin crash when JavaFX is not present</li>
+            <li>Added player controls (play, pause, loop)</li>
+            <li>Updated bodymovin to 4.5.7</li>
+        </ul>
         <b>0.0.1</b>
         <ul>
             <li>Initial release</li>
@@ -20,25 +25,19 @@
     <depends>com.intellij.modules.lang</depends>
     <idea-version since-build="145"/>
 
+    <application-components>
+        <component>
+            <implementation-class>net.olegg.bodylookin.BodylookinPlugin</implementation-class>
+        </component>
+    </application-components>
+
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
             id="bodylookin"
             anchor="right"
             secondary="true"
+            icon="/icons/wave.png"
             factoryClass="net.olegg.bodylookin.toolwindow.BodylookinFactory"
         />
     </extensions>
-
-    <actions>
-        <group id="bodylookin.ActionGroup">
-            <action
-                    class="net.olegg.bodylookin.action.LookAction"
-                    id="bodylookin.LookAction"
-                    text="bodylookin"
-                    icon="/icons/wave.png"
-            />
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </group>
-    </actions>
-
 </idea-plugin>
