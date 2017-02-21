@@ -1,6 +1,6 @@
 # bodylookin
 
-bodylookin is a IntelliJ IDEA-based IDE viewer plugin for [bodymovin](https://github.com/bodymovin/bodymovin) library.
+bodylookin is a IntelliJ IDEA-based IDE viewer plugin for [bodymovin](https://github.com/bodymovin/bodymovin) and [Lottie](https://github.com/airbnb/lottie-android) libraries.
 
 ## Installation
 
