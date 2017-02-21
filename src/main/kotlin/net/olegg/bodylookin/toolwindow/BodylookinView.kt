@@ -1,8 +1,14 @@
 package net.olegg.bodylookin.toolwindow
 
+import com.intellij.json.JsonFileType
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.fileChooser.FileChooserFactory
 import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.impl.LoadTextUtil
 import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.util.ui.JBUI
 import javafx.application.Platform
 import javafx.concurrent.Worker
@@ -11,6 +17,7 @@ import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
 import net.olegg.bodylookin.Icons
+import net.olegg.bodylookin.isJson
 import netscape.javascript.JSObject
 
 /**
@@ -29,7 +36,25 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             val project = e?.project ?: return
             val json = FileEditorManager.getInstance(project).selectedTextEditor?.document?.text
             if (json != null) {
-                loadAnimation(json)
+                loadJson(json)
+            }
+        }
+
+        override fun update(e: AnActionEvent?) {
+            e?.presentation?.isEnabled = let {
+                val project = e?.project ?: return@let false
+                val file = FileEditorManager.getInstance(project).selectedFiles.getOrNull(0)
+                return@let file.isJson
+            }
+        }
+    }
+
+    val openAction: AnAction = object : AnAction("Load file", "", Icons.OPEN) {
+        override fun actionPerformed(e: AnActionEvent?) {
+            val descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor(JsonFileType.INSTANCE)
+            val file = FileChooserFactory.getInstance().createFileChooser(descriptor, null, null).choose(null).getOrNull(0)
+            if (file != null) {
+                loadFile(file)
             }
         }
     }
@@ -84,6 +109,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
         val group = DefaultActionGroup()
         group.addAll(listOf(
                 lookAction,
+                openAction,
                 Separator(),
                 playAction,
                 pauseAction,
@@ -105,7 +131,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
         }
     }
 
-    fun loadAnimation(source: String) {
+    fun loadJson(source: String) {
         Platform.runLater {
             val script = """
             bodymovin.destroy();
@@ -126,6 +152,13 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             } else {
                 js = engine.executeScript(script) as? JSObject
             }
+        }
+    }
+
+    fun loadFile(file: VirtualFile) {
+        ApplicationManager.getApplication().runReadAction {
+            val json = LoadTextUtil.loadText(file).toString()
+            loadJson(json)
         }
     }
 }

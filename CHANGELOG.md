@@ -1,3 +1,9 @@
+## 0.0.3
+
+- Added file loading from context menu
+- Added file loading from filesystem
+- Limit supported files to JSON
+
 ## 0.0.2
 
 - Fixed plugin crash when JavaFX is not present
