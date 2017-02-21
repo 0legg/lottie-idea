@@ -40,4 +40,15 @@
             factoryClass="net.olegg.bodylookin.toolwindow.BodylookinFactory"
         />
     </extensions>
+
+    <actions>
+        <group id="bodylookin.ActionGroup">
+            <action
+                    class="net.olegg.bodylookin.action.LoadAction"
+                    id="bodylookin.LoadAction"
+                    text="bodylookin"
+                    icon="/icons/wiggle.png"
+            />
+        </group>
+    </actions>
 </idea-plugin>
