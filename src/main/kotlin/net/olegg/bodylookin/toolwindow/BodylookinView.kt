@@ -1,5 +1,6 @@
 package net.olegg.bodylookin.toolwindow
 
+import com.intellij.json.JsonFileType
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.ui.SimpleToolWindowPanel
@@ -29,7 +30,15 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             val project = e?.project ?: return
             val json = FileEditorManager.getInstance(project).selectedTextEditor?.document?.text
             if (json != null) {
-                loadAnimation(json)
+                loadJson(json)
+            }
+        }
+
+        override fun update(e: AnActionEvent?) {
+            e?.presentation?.isEnabled = let {
+                val project = e?.project ?: return@let false
+                val file = FileEditorManager.getInstance(project).selectedFiles.getOrNull(0)
+                return@let file?.fileType == JsonFileType.INSTANCE
             }
         }
     }
@@ -105,7 +114,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
         }
     }
 
-    fun loadAnimation(source: String) {
+    fun loadJson(source: String) {
         Platform.runLater {
             val script = """
             bodymovin.destroy();
