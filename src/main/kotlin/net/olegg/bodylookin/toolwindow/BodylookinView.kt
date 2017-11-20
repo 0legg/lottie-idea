@@ -27,7 +27,7 @@ import net.olegg.bodylookin.isJson
 import netscape.javascript.JSObject
 
 /**
- * Created by olegg on 2/12/17.
+ * UI logic and JS player controller.
  */
 class BodylookinView : SimpleToolWindowPanel(true) {
     val root: String = javaClass.classLoader.getResource("/bodylookin.html").toExternalForm()

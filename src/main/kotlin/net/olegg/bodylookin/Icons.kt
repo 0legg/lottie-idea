@@ -3,7 +3,7 @@ package net.olegg.bodylookin
 import com.intellij.openapi.util.IconLoader
 
 /**
- * Created by olegg on 2/19/17.
+ * Helper class to store icons.
  */
 object Icons {
     fun load(path: String) = IconLoader.getIcon(path)

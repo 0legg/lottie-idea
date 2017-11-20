@@ -11,7 +11,7 @@ import net.olegg.bodylookin.BodylookinPlugin
 import javax.swing.JComponent
 
 /**
- * Created by olegg on 2/12/17.
+ * Tool window provider. Shows notification if user doesn't have JavaFX.
  */
 class BodylookinFactory : ToolWindowFactory {
 
