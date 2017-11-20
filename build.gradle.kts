@@ -14,6 +14,7 @@ plugins {
     kotlin("jvm") version "1.1.60"
     id("org.jetbrains.intellij") version("0.2.17")
     id("nu.studer.credentials") version("1.0.3")
+    id("org.jmailen.kotlinter") version "1.5.0"
 }
 
 repositories {
