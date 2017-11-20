@@ -53,6 +53,10 @@ publishPlugin {
     password(credentials["JETBRAINS_PASSWORD"])
 }
 
+apply {
+    from("gradle/hooks.gradle.kts")
+}
+
 group = "net.olegg"
 version = "0.0.4-SNAPSHOT"
 
