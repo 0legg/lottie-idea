@@ -1,7 +1,13 @@
 package net.olegg.bodylookin.toolwindow
 
 import com.intellij.json.JsonFileType
-import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.ActionPlaces
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.actionSystem.Separator
+import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.fileChooser.FileChooserFactory
@@ -144,7 +150,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
                 animationData: JSON.parse('$source')
             });"""
             if (engine.loadWorker.state != Worker.State.SUCCEEDED) {
-                engine.loadWorker.stateProperty().addListener { value, oldState, newState ->
+                engine.loadWorker.stateProperty().addListener { _, _, newState ->
                     if (newState == Worker.State.SUCCEEDED) {
                         js = engine.executeScript(script) as? JSObject
                     }
