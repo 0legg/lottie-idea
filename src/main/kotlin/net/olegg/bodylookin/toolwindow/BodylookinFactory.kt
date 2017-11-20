@@ -11,12 +11,12 @@ import net.olegg.bodylookin.BodylookinPlugin
 import javax.swing.JComponent
 
 /**
- * Created by olegg on 2/12/17.
+ * Tool window provider. Shows notification if user doesn't have JavaFX.
  */
-class BodylookinFactory: ToolWindowFactory {
+class BodylookinFactory : ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val view : JComponent = if (ApplicationManager.getApplication().getComponent(BodylookinPlugin::class.java).hasJavafx) {
+        val view: JComponent = if (ApplicationManager.getApplication().getComponent(BodylookinPlugin::class.java).hasJavafx) {
             BodylookinView()
         } else {
             JBLabel("""<html>Unable to instantiate JavaFX.

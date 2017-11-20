@@ -5,7 +5,7 @@ import com.intellij.openapi.components.ApplicationComponent
 import com.intellij.openapi.vfs.VirtualFile
 
 /**
- * Created by olegg on 2/15/17.
+ * Root plugin class.
  */
 class BodylookinPlugin : ApplicationComponent {
 

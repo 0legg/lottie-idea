@@ -1,7 +1,7 @@
 package net.olegg.bodylookin
 
 /**
- * Created by olegg on 2/21/17.
+ * Helper class to store constants.
  */
 object Constants {
     val ACTION_GROUP = "bodylookin.ActionGroup"

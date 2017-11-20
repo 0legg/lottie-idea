@@ -10,7 +10,7 @@ import net.olegg.bodylookin.isJson
 import net.olegg.bodylookin.toolwindow.BodylookinView
 
 /**
- * Created by olegg on 2/21/17.
+ * Animation loading logic.
  */
 class LoadAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
