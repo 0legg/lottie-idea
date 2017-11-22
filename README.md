@@ -1,6 +1,6 @@
-# bodylookin
+# lottie-idea
 
-bodylookin is a IntelliJ IDEA-based IDE viewer plugin for [bodymovin](https://github.com/bodymovin/bodymovin) and [Lottie](https://github.com/airbnb/lottie-android) libraries.
+lottie-idea is a IntelliJ IDEA-based IDE viewer plugin for [Lottie Web](https://github.com/airbnb/lottie-web) and [Lottie Android](https://github.com/airbnb/lottie-android) libraries.
 
 ## Installation
 
@@ -10,8 +10,7 @@ Grab fresh copy from [releases page](https://github.com/0legg/bodylookin/release
 
 - Oracle JDK 8 (plugin depends on JavaFX browser component).
 - If you're getting message that your IDE runs unsupported JDK, follow instructions for 
-[IntellijJ IDEA](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the-JDK-version-the-IDE-will-run-under) or [Android Studio](http://tools.android.com/tech-docs/configuration)
+[IntelliJ IDEA](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the-JDK-version-the-IDE-will-run-under) or [Android Studio](http://tools.android.com/tech-docs/configuration)
 to set up proper JDK for your IDE.
 
-This project uses source code of bodymovin library licensed under [MIT license](https://github.com/bodymovin/bodymovin/blob/master/LICENSE.md)
- 
+This project uses source code of lottie-web library licensed under [MIT license](https://github.com/bodymovin/bodymovin/blob/master/LICENSE.md)

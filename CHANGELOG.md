@@ -1,3 +1,8 @@
+## 0.0.4
+
+- bodylookin is now lottie-idea!
+- Updated lottie-web to 5.0.2 
+
 ## 0.0.3
 
 - Added file loading from context menu

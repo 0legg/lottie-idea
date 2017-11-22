@@ -1,16 +1,16 @@
-package net.olegg.bodylookin.action
+package net.olegg.lottie.idea.action
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.wm.ToolWindowManager
-import net.olegg.bodylookin.Constants
-import net.olegg.bodylookin.isJson
-import net.olegg.bodylookin.toolwindow.BodylookinView
+import net.olegg.lottie.idea.Constants
+import net.olegg.lottie.idea.isJson
+import net.olegg.lottie.idea.toolwindow.LottieIdeaView
 
 /**
- * Created by olegg on 2/21/17.
+ * Animation loading logic.
  */
 class LoadAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
@@ -24,7 +24,7 @@ class LoadAction : AnAction() {
         val toolWindowManager = ToolWindowManager.getInstance(project)
         val toolWindow = toolWindowManager.getToolWindow(Constants.TOOL_WINDOW_ID)
         if (toolWindow.isVisible) {
-            val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return
+            val content = toolWindow.contentManager.getContent(0)?.component as? LottieIdeaView ?: return
             if (doc != null) {
                 content.loadJson(doc.text)
             } else if (file != null) {
@@ -32,7 +32,7 @@ class LoadAction : AnAction() {
             }
         } else {
             toolWindow.show {
-                val content = toolWindow.contentManager.getContent(0)?.component as? BodylookinView ?: return@show
+                val content = toolWindow.contentManager.getContent(0)?.component as? LottieIdeaView ?: return@show
                 if (doc != null) {
                     content.loadJson(doc.text)
                 } else if (file != null) {

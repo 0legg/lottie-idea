@@ -1,7 +1,13 @@
-package net.olegg.bodylookin.toolwindow
+package net.olegg.lottie.idea.toolwindow
 
 import com.intellij.json.JsonFileType
-import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.actionSystem.ActionPlaces
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.actionSystem.Separator
+import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.fileChooser.FileChooserFactory
@@ -16,15 +22,15 @@ import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
-import net.olegg.bodylookin.Icons
-import net.olegg.bodylookin.isJson
+import net.olegg.lottie.idea.Icons
+import net.olegg.lottie.idea.isJson
 import netscape.javascript.JSObject
 
 /**
- * Created by olegg on 2/12/17.
+ * UI logic and JS player controller.
  */
-class BodylookinView : SimpleToolWindowPanel(true) {
-    val root: String = javaClass.classLoader.getResource("/bodylookin.html").toExternalForm()
+class LottieIdeaView : SimpleToolWindowPanel(true) {
+    val root: String = javaClass.classLoader.getResource("/lottie-idea.html").toExternalForm()
 
     val panel = JFXPanel()
     lateinit var webview: WebView
@@ -136,7 +142,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             val script = """
             bodymovin.destroy();
             bodymovin.loadAnimation({
-                wrapper: document.getElementById('bodymovin'),
+                wrapper: document.getElementById('lottie'),
                 animType: 'svg',
                 loop: true,
                 prerender: true,
@@ -144,7 +150,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
                 animationData: JSON.parse('$source')
             });"""
             if (engine.loadWorker.state != Worker.State.SUCCEEDED) {
-                engine.loadWorker.stateProperty().addListener { value, oldState, newState ->
+                engine.loadWorker.stateProperty().addListener { _, _, newState ->
                     if (newState == Worker.State.SUCCEEDED) {
                         js = engine.executeScript(script) as? JSObject
                     }
