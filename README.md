@@ -1,6 +1,6 @@
-# bodylookin
+# lottie-idea
 
-bodylookin is a IntelliJ IDEA-based IDE viewer plugin for [Lottie Web](https://github.com/airbnb/lottie-web) and [Lottie Android](https://github.com/airbnb/lottie-android) libraries.
+lottie-idea is a IntelliJ IDEA-based IDE viewer plugin for [Lottie Web](https://github.com/airbnb/lottie-web) and [Lottie Android](https://github.com/airbnb/lottie-android) libraries.
 
 ## Installation
 

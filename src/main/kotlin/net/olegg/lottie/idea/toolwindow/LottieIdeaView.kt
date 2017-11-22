@@ -1,4 +1,4 @@
-package net.olegg.bodylookin.toolwindow
+package net.olegg.lottie.idea.toolwindow
 
 import com.intellij.json.JsonFileType
 import com.intellij.openapi.actionSystem.ActionManager
@@ -22,15 +22,15 @@ import javafx.embed.swing.JFXPanel
 import javafx.scene.Scene
 import javafx.scene.web.WebEngine
 import javafx.scene.web.WebView
-import net.olegg.bodylookin.Icons
-import net.olegg.bodylookin.isJson
+import net.olegg.lottie.idea.Icons
+import net.olegg.lottie.idea.isJson
 import netscape.javascript.JSObject
 
 /**
  * UI logic and JS player controller.
  */
-class BodylookinView : SimpleToolWindowPanel(true) {
-    val root: String = javaClass.classLoader.getResource("/bodylookin.html").toExternalForm()
+class LottieIdeaView : SimpleToolWindowPanel(true) {
+    val root: String = javaClass.classLoader.getResource("/lottie-idea.html").toExternalForm()
 
     val panel = JFXPanel()
     lateinit var webview: WebView
@@ -142,7 +142,7 @@ class BodylookinView : SimpleToolWindowPanel(true) {
             val script = """
             bodymovin.destroy();
             bodymovin.loadAnimation({
-                wrapper: document.getElementById('bodymovin'),
+                wrapper: document.getElementById('lottie'),
                 animType: 'svg',
                 loop: true,
                 prerender: true,
