@@ -58,7 +58,7 @@ apply {
 }
 
 group = "net.olegg"
-version = "0.0.4"
+version = "0.1.0-SNAPSHOT"
 
 inline operator fun <T : Task> T.invoke(a: T.() -> Unit): T = apply(a)
 operator fun CredentialsContainer.get(key: String) = this.getProperty(key)
