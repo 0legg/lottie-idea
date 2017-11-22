@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>net.olegg.bodylookin</id>
-    <name>bodylookin</name>
+    <name>lottie-idea</name>
     <vendor email="me@olegg.net">Oleg Godovykh</vendor>
 
     <description><![CDATA[
@@ -33,25 +33,25 @@
 
     <application-components>
         <component>
-            <implementation-class>net.olegg.bodylookin.BodylookinPlugin</implementation-class>
+            <implementation-class>net.olegg.lottie.idea.LottieIdeaPlugin</implementation-class>
         </component>
     </application-components>
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-            id="bodylookin"
+            id="lottie-idea"
             anchor="right"
             secondary="true"
             icon="/icons/wave.png"
-            factoryClass="net.olegg.bodylookin.toolwindow.BodylookinFactory"
+            factoryClass="net.olegg.lottie.idea.toolwindow.LottieIdeaFactory"
         />
     </extensions>
 
     <actions>
         <action
-            class="net.olegg.bodylookin.action.LoadAction"
-            id="bodylookin.LoadAction"
-            text="bodylookin"
+            class="net.olegg.lottie.idea.action.LoadAction"
+            id="lottie-idea.LoadAction"
+            text="lottie-idea"
             icon="/icons/wiggle.png"
             >
 

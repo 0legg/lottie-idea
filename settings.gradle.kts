@@ -1,3 +1,3 @@
 gradle.rootProject {
-    setProperty("name", "bodylookin")
+    setProperty("name", "lottie-idea")
 }

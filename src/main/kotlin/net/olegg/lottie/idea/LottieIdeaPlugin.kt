@@ -1,4 +1,4 @@
-package net.olegg.bodylookin
+package net.olegg.lottie.idea
 
 import com.intellij.json.JsonFileType
 import com.intellij.openapi.components.ApplicationComponent
@@ -7,7 +7,7 @@ import com.intellij.openapi.vfs.VirtualFile
 /**
  * Root plugin class.
  */
-class BodylookinPlugin : ApplicationComponent {
+class LottieIdeaPlugin : ApplicationComponent {
 
     override fun getComponentName() = javaClass.name
 

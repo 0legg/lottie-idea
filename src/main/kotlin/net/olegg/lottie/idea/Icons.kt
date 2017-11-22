@@ -1,4 +1,4 @@
-package net.olegg.bodylookin
+package net.olegg.lottie.idea
 
 import com.intellij.openapi.util.IconLoader
 
